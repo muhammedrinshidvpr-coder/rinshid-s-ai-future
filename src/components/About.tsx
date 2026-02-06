@@ -38,17 +38,21 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image Section */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative"
           >
-            <div className="relative w-full max-w-md mx-auto">
+            <motion.div
+              className="relative w-full max-w-md mx-auto"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            >
               {/* Background Decoration */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-accent/10 to-primary/5 rounded-3xl" />
+              <div className="absolute -inset-4 bg-gradient-to-br from-accent/10 to-primary/5 rounded-3xl transition-opacity duration-500" />
               
               {/* Main Image */}
-              <div className="relative rounded-3xl overflow-hidden shadow-xl">
+              <div className="relative rounded-3xl overflow-hidden shadow-lg transition-shadow duration-500 hover:shadow-2xl">
                 <img
                   src={aboutImage}
                   alt="Muhammed Rinshid VP"
@@ -73,7 +77,7 @@ const About = () => {
                   <p className="text-base font-semibold text-foreground">CosmIQ</p>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Content Section */}

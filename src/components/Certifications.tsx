@@ -49,21 +49,21 @@
  
          {/* Certifications Grid */}
          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-           {certifications.map((cert, index) => (
-             <motion.div
-               key={cert.title}
-               initial={{ opacity: 0, y: 30 }}
-               animate={isInView ? { opacity: 1, y: 0 } : {}}
-               transition={{ delay: 0.15 * index, duration: 0.5 }}
-               className={`group ${cert.featured ? 'md:col-span-2' : ''}`}
-             >
-               <div
-                 className={`h-full rounded-2xl bg-card border overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-                   cert.featured
-                     ? 'border-accent/40 shadow-glow'
-                     : 'border-border/50 hover:border-accent/30'
-                 }`}
-               >
+            {certifications.map((cert, index) => (
+              <motion.div
+                key={cert.title}
+                initial={{ opacity: 0, y: 25 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 * index, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                className={`group ${cert.featured ? 'md:col-span-2' : ''}`}
+              >
+                <div
+                  className={`h-full rounded-2xl bg-card border overflow-hidden transition-all duration-500 ease-out hover:shadow-xl ${
+                    cert.featured
+                      ? 'border-accent/40 shadow-glow'
+                      : 'border-border/50 hover:border-accent/30'
+                  }`}
+                >
                  {/* Featured Badge */}
                  {cert.featured && (
                    <div className="bg-gradient-to-r from-accent to-cyan-500 px-4 py-2 flex items-center justify-center gap-2">
@@ -79,13 +79,13 @@
                        cert.featured ? 'md:w-3/5' : 'w-full'
                      }`}
                    >
-                     <img
-                       src={cert.image}
-                       alt={cert.title}
-                       className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-                         cert.featured ? 'h-64 md:h-80' : 'h-48'
-                       }`}
-                     />
+                      <img
+                        src={cert.image}
+                        alt={cert.title}
+                        className={`w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
+                          cert.featured ? 'h-64 md:h-80' : 'h-48'
+                        }`}
+                      />
                      <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                    </div>
  
