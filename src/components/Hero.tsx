@@ -77,24 +77,28 @@ const Hero = () => {
 
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             className="order-1 lg:order-2 flex justify-center"
           >
-            <div className="relative">
+            <motion.div
+              className="relative"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            >
               {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-accent/20 to-transparent rounded-3xl blur-2xl transform scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-b from-accent/15 to-transparent rounded-3xl blur-2xl transform scale-110 transition-opacity duration-700" />
               
               {/* Image Container */}
-              <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px] rounded-3xl overflow-hidden shadow-xl transition-shadow duration-500 hover:shadow-2xl">
                 <img
                   src={heroImage}
                   alt="Muhammed Rinshid VP"
                   className="w-full h-full object-cover object-top"
                 />
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent" />
               </div>
 
               {/* Floating Badge */}
@@ -114,7 +118,7 @@ const Hero = () => {
                   </div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 
