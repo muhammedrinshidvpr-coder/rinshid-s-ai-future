@@ -18,12 +18,12 @@ const socialLinks = [
   },
   {
     name: 'GitHub',
-    href: '#',
+    href: 'https://github.com/muhammedrinshidvpr-coder',
     icon: Github,
   },
   {
     name: 'YouTube',
-    href: '#',
+    href: 'https://www.youtube.com/@RinshidRazaq',
     icon: Youtube,
   },
 ];
