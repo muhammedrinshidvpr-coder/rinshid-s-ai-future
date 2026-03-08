@@ -1,7 +1,8 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
-import { ArrowUpRight, Sparkles, Cpu, X, ExternalLink, Github, Radio, Wifi, Database, Server, Shield, Globe, Zap, Signal } from 'lucide-react';
+import { ArrowUpRight, Sparkles, Cpu, X, ExternalLink, Github, Radio, Wifi, Database, Server, Shield, Globe, Zap, Signal, Bot } from 'lucide-react';
 import TiltCard from './TiltCard';
+import SalesAgentModal from './SalesAgentModal';
 
 interface Project {
   id: string;
