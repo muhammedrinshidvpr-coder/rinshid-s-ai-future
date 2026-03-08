@@ -3,6 +3,8 @@ import { useRef, useState, useCallback } from 'react';
 import { ArrowUpRight, Sparkles, Cpu, X, ExternalLink, Github, Radio, Wifi, Database, Server, Shield, Globe, Zap, Signal, Bot } from 'lucide-react';
 import TiltCard from './TiltCard';
 import SalesAgentModal from './SalesAgentModal';
+import CampusTradeModal from './CampusTradeModal';
+import campusTradeHero from '@/assets/campustrade-hero.png';
 
 interface Project {
   id: string;
