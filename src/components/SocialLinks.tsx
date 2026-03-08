@@ -1,4 +1,5 @@
 import { Instagram, Linkedin, Github, Youtube, MessageCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const socialLinks = [
   { name: 'Instagram', href: 'https://www.instagram.com/rinshidrazaq?igsh=MTFrOWF2cGJveDF1cw==', icon: Instagram },
@@ -15,17 +16,25 @@ interface SocialLinksProps {
 const SocialLinks = ({ className = '' }: SocialLinksProps) => {
   return (
     <div className={`flex items-center justify-center gap-4 ${className}`}>
-      {socialLinks.map((link) => (
-        <a
+      {socialLinks.map((link, i) => (
+        <motion.a
           key={link.name}
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={link.name}
-          className="w-11 h-11 rounded-full bg-secondary border border-border/50 flex items-center justify-center text-muted-foreground transition-all duration-300 hover:bg-accent/10 hover:text-accent hover:border-accent/30 hover:scale-110"
+          whileHover={{ scale: 1.2, y: -3 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          className="relative w-12 h-12 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/40 hover:bg-accent/10 transition-colors duration-300 group"
         >
-          <link.icon className="w-5 h-5" />
-        </a>
+          {/* Glow ring on hover */}
+          <div
+            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            style={{ boxShadow: '0 0 20px hsl(192 91% 42% / 0.25), 0 0 40px hsl(192 91% 42% / 0.1)' }}
+          />
+          <link.icon className="w-5 h-5 relative z-10" />
+        </motion.a>
       ))}
     </div>
   );
