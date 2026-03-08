@@ -32,25 +32,45 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 auto-rows-auto">
 
           {/* Photo card - tall, spans 1 col */}
-          <BentoCard className="md:row-span-2" delay={0.1} isInView={isInView}>
-            <div className="relative w-full h-full min-h-[280px] md:min-h-0 -m-6 md:-m-7">
-              <img
+          {/* Photo card — custom built (not using BentoCard) for full-bleed image */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+            whileHover={{ y: -6, transition: { duration: 0.3 } }}
+            className="relative md:row-span-2 rounded-2xl overflow-hidden group"
+          >
+            <div className="relative w-full h-full min-h-[340px]">
+              <motion.img
                 src={aboutImage}
                 alt="Muhammed Rinshid VP"
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-cover object-top absolute inset-0"
+                initial={{ scale: 1.1 }}
+                animate={isInView ? { scale: 1 } : {}}
+                transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent rounded-2xl" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="flex items-center gap-3">
+              {/* Gradient overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/20 to-transparent" />
+              {/* Hover glow border */}
+              <div className="absolute inset-0 rounded-2xl border border-white/[0.08] group-hover:border-accent/20 transition-colors duration-500" />
+              {/* Info bar */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 p-5"
+                initial={{ opacity: 0, y: 15 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.5, duration: 0.6 }}
+              >
+                <div className="flex items-center gap-3 glass-card rounded-xl px-4 py-3">
                   <img src={cosmiqLogo} alt="CosmIQ" className="w-10 h-10 rounded-lg object-cover border border-white/10" />
                   <div>
                     <p className="text-foreground font-semibold text-sm">Muhammed Rinshid VP</p>
                     <p className="text-accent text-xs font-medium">Founder at CosmIQ</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </BentoCard>
+          </motion.div>
 
           {/* Founder & CGO - wide */}
           <BentoCard icon={Rocket} iconLabel="Role" className="md:col-span-2" delay={0.15} isInView={isInView}>
