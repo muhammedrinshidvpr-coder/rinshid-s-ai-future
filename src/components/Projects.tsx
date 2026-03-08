@@ -49,20 +49,12 @@ const projects: Project[] = [
     demo: '#',
   },
   {
-    id: 'smart-learning',
-    title: 'Smart Learning System',
-    category: 'Coming Soon',
-    description: 'Personalized AI-powered education platform for future-ready skill development.',
-    tags: ['EdTech', 'ML', 'Platform'],
-    status: 'coming-soon',
-  },
-  {
-    id: 'analytics-suite',
-    title: 'Business Analytics Suite',
-    category: 'Coming Soon',
-    description: 'Data-driven insights and predictive analytics for informed decision making.',
-    tags: ['Analytics', 'Dashboard', 'B2B'],
-    status: 'coming-soon',
+    id: 'ai-sales-agent',
+    title: 'Autonomous AI Outbound Sales Agent',
+    category: 'AI Automation',
+    description: 'A fully autonomous AI agent that researches companies, scrapes value propositions, and generates hyper-personalized cold emails to CEOs — zero human intervention.',
+    tags: ['n8n', 'Google Gemini', 'Docker', 'Automation'],
+    status: 'live' as const,
   },
 ];
 
