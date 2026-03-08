@@ -384,6 +384,14 @@ const Projects = () => {
                           <span className="text-[10px] font-mono text-accent/60 tracking-wider uppercase">Deep Dive →</span>
                         </motion.div>
                       </div>
+                    ) : project.id === 'campustrade' ? (
+                      <div className="relative w-full h-full">
+                        <img src={campusTradeHero} alt="CampusTrade" className="w-full h-full object-cover opacity-80" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                        <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-3 left-0 right-0 text-center">
+                          <span className="text-[10px] font-mono text-accent/60 tracking-wider uppercase">Explore Venture →</span>
+                        </motion.div>
+                      </div>
                     ) : (
                       <ResilienceNetVisual />
                     )}
