@@ -6,6 +6,7 @@ import Skills from '@/components/Skills';
 import Certifications from '@/components/Certifications';
 import Projects from '@/components/Projects';
 import VentureTimeline from '@/components/VentureTimeline';
+import TechnicalInsights from '@/components/TechnicalInsights';
 import Contact from '@/components/Contact';
 import CodeActivity from '@/components/CodeActivity';
 import InteractiveTerminal from '@/components/InteractiveTerminal';
@@ -24,6 +25,7 @@ const Index = () => {
         <Certifications />
         <Projects />
         <VentureTimeline />
+        <TechnicalInsights />
         <Contact />
         <CodeActivity />
         <InteractiveTerminal />
