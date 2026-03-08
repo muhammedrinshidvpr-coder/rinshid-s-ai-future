@@ -58,6 +58,14 @@ const projects: Project[] = [
     tags: ['n8n', 'Google Gemini', 'Docker', 'Automation'],
     status: 'live' as const,
   },
+  {
+    id: 'campustrade',
+    title: 'CampusTrade: TKM E-commerce',
+    category: 'Featured Venture',
+    description: 'A specialized platform enabling TKM students to safely buy and sell campus gear, electronics, and support student brands — built for the Kollam college community.',
+    tags: ['Full-Stack', 'E-commerce', 'TKM Certified', 'Vercel'],
+    status: 'live' as const,
+  },
 ];
 
 // AI Processing loader for coming soon cards
