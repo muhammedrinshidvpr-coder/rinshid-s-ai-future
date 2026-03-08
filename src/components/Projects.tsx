@@ -434,6 +434,7 @@ const Projects = () => {
       <AnimatePresence>
         {expandedProject && <ProjectModal project={expandedProject} onClose={handleClose} />}
         {showSalesAgent && <SalesAgentModal onClose={() => setShowSalesAgent(false)} />}
+        {showCampusTrade && <CampusTradeModal onClose={() => setShowCampusTrade(false)} />}
       </AnimatePresence>
     </section>
   );
