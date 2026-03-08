@@ -25,6 +25,7 @@ const Index = () => {
         <Projects />
         <VentureTimeline />
         <Contact />
+        <CodeActivity />
         <InteractiveTerminal />
       </main>
       <Footer />
