@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, Container, Cpu, Sparkles, FileSpreadsheet, Code2, Brain } from 'lucide-react';
+import { X, Container, Cpu, Sparkles, FileSpreadsheet, Code2, Brain, Github } from 'lucide-react';
 import deepDiveImg from '@/assets/ai-sales-agent-deepdive.png';
 
 const techStack = [
@@ -10,6 +10,8 @@ const techStack = [
   { name: 'Google Sheets', icon: FileSpreadsheet },
   { name: 'Prompt Engineering', icon: Brain },
 ];
+
+const GITHUB_REPO_URL = 'https://github.com/rinshidkp/autonomous-ai-sales-agent';
 
 const SalesAgentModal = ({ onClose }: { onClose: () => void }) => (
   <motion.div
@@ -61,7 +63,7 @@ const SalesAgentModal = ({ onClose }: { onClose: () => void }) => (
         </motion.h2>
       </div>
 
-      {/* Main visual - the combined image */}
+      {/* Main visual */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -70,7 +72,6 @@ const SalesAgentModal = ({ onClose }: { onClose: () => void }) => (
       >
         <div className="relative rounded-2xl overflow-hidden border border-white/[0.08]" style={{ boxShadow: '0 0 60px hsl(192 91% 42% / 0.08)' }}>
           <img src={deepDiveImg} alt="Autonomous AI Outbound Sales Agent - Conceptual Architecture and n8n Workflow" className="w-full h-auto" />
-          {/* Subtle scan line overlay */}
           <div className="absolute inset-0 pointer-events-none" style={{
             background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, hsla(192, 91%, 42%, 0.015) 2px, hsla(192, 91%, 42%, 0.015) 4px)',
           }} />
@@ -141,17 +142,56 @@ const SalesAgentModal = ({ onClose }: { onClose: () => void }) => (
         </div>
       </motion.div>
 
-      {/* CTA */}
+      {/* CTA Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="px-6 md:px-10 pb-8 flex justify-center"
+        className="px-6 md:px-10 pb-8 flex flex-col sm:flex-row items-center justify-center gap-4"
       >
+        {/* View Code on GitHub */}
+        <motion.a
+          href={GITHUB_REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.96 }}
+          className="relative group inline-flex items-center gap-3 px-8 py-4 rounded-full overflow-hidden cursor-pointer"
+          style={{
+            background: 'hsla(222, 47%, 8%, 0.8)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid hsl(192, 91%, 42%, 0.35)',
+            boxShadow: '0 0 20px hsl(192 91% 42% / 0.12), inset 0 1px 0 hsla(0,0%,100%,0.05)',
+          }}
+        >
+          {/* Hover glow intensification */}
+          <div
+            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"
+            style={{
+              boxShadow: '0 0 30px hsl(192 91% 42% / 0.35), 0 0 60px hsl(192 91% 42% / 0.15), inset 0 0 20px hsl(192 91% 42% / 0.06)',
+              border: '1px solid hsl(192, 91%, 55%, 0.6)',
+            }}
+          />
+          {/* Shimmer sweep on hover */}
+          <div
+            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={{
+              background: 'linear-gradient(105deg, transparent 35%, hsla(192, 91%, 60%, 0.08) 45%, hsla(192, 91%, 60%, 0.15) 50%, hsla(192, 91%, 60%, 0.08) 55%, transparent 65%)',
+              backgroundSize: '250% 100%',
+              animation: 'shimmerSweep 2s ease-in-out infinite',
+            }}
+          />
+          <Github className="w-5 h-5 text-accent relative z-10 group-hover:drop-shadow-[0_0_6px_hsl(192,91%,42%,0.6)] transition-all duration-300" />
+          <span className="relative z-10 text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-accent transition-colors duration-300">
+            View Code on GitHub
+          </span>
+        </motion.a>
+
+        {/* Explore Architecture */}
         <motion.button
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="relative group px-10 py-4 rounded-full font-semibold text-accent-foreground overflow-hidden"
+          className="relative group px-8 py-4 rounded-full font-semibold text-accent-foreground overflow-hidden"
         >
           <div className="absolute inset-0 bg-accent rounded-full" />
           <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: '0 0 40px hsl(192 91% 42% / 0.5), 0 0 80px hsl(192 91% 42% / 0.2)' }} />
@@ -159,6 +199,14 @@ const SalesAgentModal = ({ onClose }: { onClose: () => void }) => (
         </motion.button>
       </motion.div>
     </motion.div>
+
+    {/* Shimmer keyframes */}
+    <style>{`
+      @keyframes shimmerSweep {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    `}</style>
   </motion.div>
 );
 
