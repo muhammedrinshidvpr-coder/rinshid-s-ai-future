@@ -1,40 +1,12 @@
-import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Brain, Sparkles, Bot, GraduationCap, Code2, FileCode, Globe, Cog, Workflow, Lightbulb } from 'lucide-react';
-
-const skillCategories = [
-  {
-    title: 'Core Expertise',
-    icon: Brain,
-    skills: [
-      { name: 'AI & Prompt Engineering', icon: Sparkles },
-      { name: 'AI Automation Systems', icon: Bot },
-      { name: 'AI Education & Training', icon: GraduationCap },
-    ],
-  },
-  {
-    title: 'Technical Skills',
-    icon: Code2,
-    skills: [
-      { name: 'Python (Pandas for data handling and automation)', icon: FileCode },
-      { name: 'HTML, CSS, Bootstrap (responsive web development)', icon: Globe },
-      { name: 'Software & Web Development', icon: Code2 },
-    ],
-  },
-  {
-    title: 'Applied Capabilities',
-    icon: Cog,
-    skills: [
-      { name: 'Business Automation Solutions', icon: Cog },
-      { name: 'Workflow Optimization', icon: Workflow },
-      { name: 'Teaching complex technology in a simple way', icon: Lightbulb },
-    ],
-  },
-];
+import BentoCard from './BentoCard';
 
 const Skills = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
     <section id="skills" className="section-padding relative" ref={ref}>
@@ -50,39 +22,61 @@ const Skills = () => {
           <p className="text-muted-foreground text-lg leading-relaxed">Skills I use to build AI solutions and educate future-ready learners.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.15 * categoryIndex, duration: 0.5 }}
-              className="group"
-            >
-              <div className="h-full p-6 md:p-8 rounded-2xl bg-card border border-border/50 transition-all duration-300 hover:border-accent/30 hover:shadow-lg hover:-translate-y-1">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                    <category.icon className="w-6 h-6 text-accent" />
-                  </div>
-                  <h3 className="font-display font-semibold text-xl text-foreground">{category.title}</h3>
+        {/* Bento Skills Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+
+          {/* Core Expertise - tall */}
+          <BentoCard icon={Brain} iconLabel="Core" className="md:row-span-2" delay={0.1} isInView={isInView}>
+            <h3 className="font-display font-semibold text-xl text-foreground mb-4">Core Expertise</h3>
+            <div className="space-y-3 flex-1">
+              {[
+                { icon: Sparkles, name: 'AI & Prompt Engineering' },
+                { icon: Bot, name: 'AI Automation Systems' },
+                { icon: GraduationCap, name: 'AI Education & Training' },
+              ].map((skill) => (
+                <div key={skill.name} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.05] transition-colors duration-200 hover:border-accent/20">
+                  <skill.icon className="w-5 h-5 text-accent flex-shrink-0" />
+                  <span className="text-foreground/90 text-sm">{skill.name}</span>
                 </div>
-                <div className="space-y-3">
-                  {category.skills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 0.15 * categoryIndex + 0.1 * skillIndex, duration: 0.4 }}
-                      className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors duration-200"
-                    >
-                      <skill.icon className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                      <span className="text-foreground/90 text-sm leading-relaxed">{skill.name}</span>
-                    </motion.div>
-                  ))}
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* Technical - wide */}
+          <BentoCard icon={Code2} iconLabel="Technical" className="md:col-span-2" delay={0.15} isInView={isInView}>
+            <h3 className="font-display font-semibold text-xl text-foreground mb-4">Technical Skills</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { icon: FileCode, name: 'Python & Pandas', sub: 'Data handling & automation' },
+                { icon: Globe, name: 'Web Development', sub: 'HTML, CSS, Bootstrap' },
+                { icon: Code2, name: 'Software Dev', sub: 'Full-stack applications' },
+              ].map((skill) => (
+                <div key={skill.name} className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05] transition-colors duration-200 hover:border-accent/20">
+                  <skill.icon className="w-5 h-5 text-accent mb-2" />
+                  <p className="text-foreground text-sm font-medium">{skill.name}</p>
+                  <p className="text-muted-foreground text-xs mt-0.5">{skill.sub}</p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              ))}
+            </div>
+          </BentoCard>
+
+          {/* Applied - wide */}
+          <BentoCard icon={Cog} iconLabel="Applied" className="md:col-span-2" delay={0.2} isInView={isInView}>
+            <h3 className="font-display font-semibold text-xl text-foreground mb-4">Applied Capabilities</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { icon: Cog, name: 'Business Automation', sub: 'End-to-end solutions' },
+                { icon: Workflow, name: 'Workflow Optimization', sub: 'Process efficiency' },
+                { icon: Lightbulb, name: 'Tech Education', sub: 'Simplifying complexity' },
+              ].map((skill) => (
+                <div key={skill.name} className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05] transition-colors duration-200 hover:border-accent/20">
+                  <skill.icon className="w-5 h-5 text-accent mb-2" />
+                  <p className="text-foreground text-sm font-medium">{skill.name}</p>
+                  <p className="text-muted-foreground text-xs mt-0.5">{skill.sub}</p>
+                </div>
+              ))}
+            </div>
+          </BentoCard>
         </div>
       </div>
     </section>
