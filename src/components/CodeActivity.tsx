@@ -123,8 +123,8 @@ const CodeActivity = () => {
 
               {/* Stats */}
               <div className="flex lg:flex-col gap-8 lg:gap-6 shrink-0">
-                <AnimatedCounter target={42} label="Repositories Built" suffix="+" />
-                <AnimatedCounter target={24500} label="Lines of Code" suffix="+" />
+                <AnimatedCounter target={7} label="Repositories Built" suffix="+" />
+                <AnimatedCounter target={4000} label="Lines of Code" suffix="+" />
                 <AnimatedCounter target={404} label="Coffee Consumed" suffix=" ☕" />
               </div>
             </div>
