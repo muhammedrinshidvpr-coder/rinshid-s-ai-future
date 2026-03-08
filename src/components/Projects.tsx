@@ -338,6 +338,7 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [expandedProject, setExpandedProject] = useState<Project | null>(null);
   const [showSalesAgent, setShowSalesAgent] = useState(false);
+  const [showCampusTrade, setShowCampusTrade] = useState(false);
 
   const handleClose = useCallback(() => setExpandedProject(null), []);
 
