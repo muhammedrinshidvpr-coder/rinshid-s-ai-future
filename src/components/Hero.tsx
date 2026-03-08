@@ -6,12 +6,13 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center pt-10 relative overflow-hidden"
     >
-      {/* Background Elements */}
+      {/* Background glow orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -right-32 w-[500px] h-[500px] bg-accent/[0.07] rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/3 -left-40 w-[400px] h-[400px] bg-accent/[0.05] rounded-full blur-[80px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/[0.03] rounded-full blur-[120px]" />
       </div>
 
       <div className="container-custom relative z-10">
@@ -20,14 +21,14 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="text-center lg:text-left order-2 lg:order-1"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-sm font-medium mb-6"
             >
               <Sparkles size={16} />
               <span>Founder & CGO at CosmIQ</span>
@@ -62,13 +63,13 @@ const Hero = () => {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-full text-base font-semibold transition-all duration-300 hover:shadow-glow hover:-translate-y-1"
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:-translate-y-1 bg-accent text-accent-foreground hover:shadow-glow"
               >
                 Work With Me
               </a>
               <a
                 href="#about"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-border text-foreground rounded-full text-base font-semibold transition-all duration-300 hover:border-accent hover:text-accent"
+                className="inline-flex items-center justify-center px-8 py-4 border border-border text-foreground rounded-full text-base font-semibold transition-all duration-300 hover:border-accent hover:text-accent"
               >
                 Learn More
               </a>
@@ -87,18 +88,17 @@ const Hero = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-accent/15 to-transparent rounded-3xl blur-2xl transform scale-110 transition-opacity duration-700" />
+              {/* Glow ring */}
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-b from-accent/20 via-transparent to-accent/10 blur-xl opacity-60" />
               
               {/* Image Container */}
-              <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px] rounded-3xl overflow-hidden shadow-xl transition-shadow duration-500 hover:shadow-2xl">
+              <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                 <img
                   src={heroImage}
                   alt="Muhammed Rinshid VP"
                   className="w-full h-full object-cover object-top"
                 />
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
               </div>
 
               {/* Floating Badge */}
@@ -106,7 +106,7 @@ const Hero = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
-                className="absolute -bottom-4 -right-4 md:bottom-8 md:-right-6 glass-card px-4 py-3 rounded-2xl shadow-lg"
+                className="absolute -bottom-4 -right-4 md:bottom-8 md:-right-6 glass-card px-4 py-3 rounded-2xl shadow-lg glow-border"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
@@ -129,12 +129,12 @@ const Hero = () => {
           transition={{ delay: 1, duration: 0.6 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-muted-foreground font-medium">Scroll</span>
+          <span className="text-xs text-muted-foreground font-medium tracking-widest uppercase">Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ArrowDown size={20} className="text-muted-foreground" />
+            <ArrowDown size={20} className="text-accent/60" />
           </motion.div>
         </motion.div>
       </div>
