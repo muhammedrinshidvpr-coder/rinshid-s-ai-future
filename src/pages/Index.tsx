@@ -25,6 +25,7 @@ const Index = () => {
         <Certifications />
         <Projects />
         <VentureTimeline />
+        <TechnicalInsights />
         <Contact />
         <CodeActivity />
         <InteractiveTerminal />
