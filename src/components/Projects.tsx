@@ -368,6 +368,7 @@ const Projects = () => {
                 <button
                   onClick={() => {
                     if (project.id === 'ai-sales-agent') setShowSalesAgent(true);
+                    else if (project.id === 'campustrade') setShowCampusTrade(true);
                     else if (project.status === 'live') setExpandedProject(project);
                   }}
                   className="w-full text-left cursor-pointer"
