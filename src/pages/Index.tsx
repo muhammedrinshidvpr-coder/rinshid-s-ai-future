@@ -7,6 +7,7 @@ import Certifications from '@/components/Certifications';
 import Projects from '@/components/Projects';
 import VentureTimeline from '@/components/VentureTimeline';
 import Contact from '@/components/Contact';
+import InteractiveTerminal from '@/components/InteractiveTerminal';
 import Footer from '@/components/Footer';
 import AIChatWidget from '@/components/AIChatWidget';
 
