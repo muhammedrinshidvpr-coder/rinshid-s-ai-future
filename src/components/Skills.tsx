@@ -174,15 +174,9 @@ const Skills = () => {
 
   const snippet = useMemo(() => skillSnippets[activeSkill], [activeSkill]);
 
-  // Position skills in orbit rings
-  const getOrbitPosition = (index: number, ring: number, totalInRing: number) => {
-    const angle = (index / totalInRing) * 360;
-    const radius = ring === 1 ? 90 : ring === 2 ? 155 : 215;
-    return { angle, radius };
-  };
-
+  // Orbit radii: md uses full, mobile not shown (grid instead)
+  const orbitRadii = [90, 155, 215];
   const ringCounts = { 1: 3, 2: 3, 3: 3 };
-  const ringIndices = { 1: 0, 2: 0, 3: 0 };
 
   return (
     <section id="skills" className="section-padding relative" ref={ref}>
@@ -195,10 +189,42 @@ const Skills = () => {
         >
           <span className="inline-block text-accent font-medium text-sm uppercase tracking-widest mb-4">What I Do</span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-5">Skills & Expertise</h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">Hover a skill node to see it come alive in the terminal.</p>
+          <p className="text-muted-foreground text-lg leading-relaxed">Tap a skill to see it come alive in the terminal.</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        {/* Mobile: Grid layout */}
+        <div className="md:hidden space-y-6 mb-8">
+          <div className="grid grid-cols-3 gap-3">
+            {allSkills.map((skill, i) => {
+              const isActive = activeSkill === skill.name;
+              const Icon = skill.icon;
+              return (
+                <motion.button
+                  key={skill.name}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
+                  onClick={() => setActiveSkill(skill.name)}
+                  className={`flex flex-col items-center gap-2 p-3 rounded-xl border transition-all duration-300 ${
+                    isActive
+                      ? 'border-accent/40 bg-accent/10'
+                      : 'border-white/[0.08] bg-white/[0.03]'
+                  }`}
+                  style={{ backdropFilter: 'blur(12px)' }}
+                >
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-accent' : 'text-muted-foreground'} transition-colors`} />
+                  <span className={`text-[10px] font-medium text-center leading-tight ${isActive ? 'text-accent' : 'text-muted-foreground'} transition-colors`}>
+                    {skill.name}
+                  </span>
+                </motion.button>
+              );
+            })}
+          </div>
+          <Terminal code={snippet.code} title={snippet.title} language={snippet.language} />
+        </div>
+
+        {/* Desktop: Orbit + Terminal */}
+        <div className="hidden md:grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Orbit visualization */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -206,9 +232,9 @@ const Skills = () => {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative flex items-center justify-center"
           >
-            <div className="relative w-[320px] h-[320px] md:w-[460px] md:h-[460px]">
+            <div className="relative w-[460px] h-[460px]">
               {/* Orbit rings */}
-              {[90, 155, 215].map((r, i) => (
+              {orbitRadii.map((r) => (
                 <div
                   key={r}
                   className="absolute rounded-full border border-white/[0.04]"
@@ -227,82 +253,82 @@ const Skills = () => {
                 <motion.div
                   animate={{ scale: [1, 1.08, 1] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center"
+                  className="w-20 h-20 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center"
                   style={{ boxShadow: '0 0 30px hsl(192 91% 42% / 0.2)' }}
                 >
-                  <Brain className="w-8 h-8 md:w-10 md:h-10 text-accent" />
+                  <Brain className="w-10 h-10 text-accent" />
                 </motion.div>
               </div>
 
               {/* Skill nodes */}
-              {allSkills.map((skill, i) => {
-                const ringIdx = ringIndices[skill.ring as keyof typeof ringIndices]++;
-                const total = ringCounts[skill.ring as keyof typeof ringCounts];
-                const { angle, radius } = getOrbitPosition(ringIdx, skill.ring, total);
-                const isActive = activeSkill === skill.name;
-                const Icon = skill.icon;
+              {(() => {
+                const indices = { 1: 0, 2: 0, 3: 0 };
+                return allSkills.map((skill, i) => {
+                  const ring = skill.ring as 1 | 2 | 3;
+                  const ringIdx = indices[ring]++;
+                  const total = ringCounts[ring];
+                  const angle = (ringIdx / total) * 360;
+                  const radius = orbitRadii[ring - 1];
+                  const isActive = activeSkill === skill.name;
+                  const Icon = skill.icon;
 
-                // Scale radius for mobile
-                const scaledRadius = radius;
+                  const x = Math.cos((angle - 90) * (Math.PI / 180)) * radius;
+                  const y = Math.sin((angle - 90) * (Math.PI / 180)) * radius;
 
-                const x = Math.cos((angle - 90) * (Math.PI / 180)) * scaledRadius;
-                const y = Math.sin((angle - 90) * (Math.PI / 180)) * scaledRadius;
-
-                return (
-                  <motion.button
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.3 + i * 0.08, duration: 0.5, type: 'spring', stiffness: 200 }}
-                    onClick={() => setActiveSkill(skill.name)}
-                    onMouseEnter={() => setActiveSkill(skill.name)}
-                    className="absolute z-20 group"
-                    style={{
-                      top: '50%',
-                      left: '50%',
-                      transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                    }}
-                  >
-                    {/* Floating animation wrapper */}
-                    <motion.div
-                      animate={{ y: [0, -4, 0] }}
-                      transition={{ duration: 2.5 + i * 0.3, repeat: Infinity, ease: 'easeInOut' }}
+                  return (
+                    <motion.button
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.3 + i * 0.08, duration: 0.5, type: 'spring', stiffness: 200 }}
+                      onClick={() => setActiveSkill(skill.name)}
+                      onMouseEnter={() => setActiveSkill(skill.name)}
+                      className="absolute z-20 group"
+                      style={{
+                        top: '50%',
+                        left: '50%',
+                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                      }}
                     >
-                      {/* Glow ring */}
-                      <div
-                        className="absolute -inset-1 rounded-xl transition-opacity duration-300"
-                        style={{
-                          opacity: isActive ? 1 : 0,
-                          background: 'linear-gradient(135deg, hsl(192 91% 42% / 0.4), hsl(172 66% 50% / 0.4))',
-                          filter: 'blur(6px)',
-                        }}
-                      />
-
-                      <div
-                        className={`relative flex flex-col items-center gap-1 px-3 py-2.5 md:px-4 md:py-3 rounded-xl border transition-all duration-300 ${
-                          isActive
-                            ? 'border-accent/40 bg-accent/10'
-                            : 'border-white/[0.08] bg-white/[0.03] hover:border-accent/20 hover:bg-accent/5'
-                        }`}
-                        style={{
-                          backdropFilter: 'blur(12px)',
-                          boxShadow: isActive ? '0 0 20px hsl(192 91% 42% / 0.15)' : 'none',
-                        }}
+                      <motion.div
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 2.5 + i * 0.3, repeat: Infinity, ease: 'easeInOut' }}
                       >
-                        <motion.div
-                          animate={isActive ? { rotateY: 360 } : { rotateY: 0 }}
-                          transition={{ duration: 0.6 }}
+                        {/* Glow */}
+                        <div
+                          className="absolute -inset-1 rounded-xl transition-opacity duration-300"
+                          style={{
+                            opacity: isActive ? 1 : 0,
+                            background: 'linear-gradient(135deg, hsl(192 91% 42% / 0.4), hsl(172 66% 50% / 0.4))',
+                            filter: 'blur(6px)',
+                          }}
+                        />
+                        <div
+                          className={`relative flex flex-col items-center gap-1 px-4 py-3 rounded-xl border transition-all duration-300 ${
+                            isActive
+                              ? 'border-accent/40 bg-accent/10'
+                              : 'border-white/[0.08] bg-white/[0.03] hover:border-accent/20 hover:bg-accent/5'
+                          }`}
+                          style={{
+                            backdropFilter: 'blur(12px)',
+                            boxShadow: isActive ? '0 0 20px hsl(192 91% 42% / 0.15)' : 'none',
+                          }}
                         >
-                          <Icon className={`w-5 h-5 ${isActive ? 'text-accent' : 'text-muted-foreground'} transition-colors`} />
-                        </motion.div>
-                        <span className={`text-[10px] md:text-xs font-medium whitespace-nowrap ${isActive ? 'text-accent' : 'text-muted-foreground'} transition-colors`}>
-                          {skill.name}
-                        </span>
-                      </div>
-                    </motion.div>
-                  </motion.button>
-                );
-              })}
+                          <motion.div
+                            animate={isActive ? { rotateY: 360 } : { rotateY: 0 }}
+                            transition={{ duration: 0.6 }}
+                          >
+                            <Icon className={`w-5 h-5 ${isActive ? 'text-accent' : 'text-muted-foreground'} transition-colors`} />
+                          </motion.div>
+                          <span className={`text-xs font-medium whitespace-nowrap ${isActive ? 'text-accent' : 'text-muted-foreground'} transition-colors`}>
+                            {skill.name}
+                          </span>
+                        </div>
+                      </motion.div>
+                    </motion.button>
+                  );
+                });
+              })()}
             </div>
           </motion.div>
 
@@ -312,11 +338,7 @@ const Skills = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <Terminal
-              code={snippet.code}
-              title={snippet.title}
-              language={snippet.language}
-            />
+            <Terminal code={snippet.code} title={snippet.title} language={snippet.language} />
           </motion.div>
         </div>
       </div>
