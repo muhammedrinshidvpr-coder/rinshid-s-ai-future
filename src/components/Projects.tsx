@@ -1,7 +1,8 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
-import { ArrowUpRight, Sparkles, Cpu, X, ExternalLink, Github, Radio, Wifi, Database, Server, Shield, Globe, Zap, Signal } from 'lucide-react';
+import { ArrowUpRight, Sparkles, Cpu, X, ExternalLink, Github, Radio, Wifi, Database, Server, Shield, Globe, Zap, Signal, Bot } from 'lucide-react';
 import TiltCard from './TiltCard';
+import SalesAgentModal from './SalesAgentModal';
 
 interface Project {
   id: string;
@@ -48,20 +49,12 @@ const projects: Project[] = [
     demo: '#',
   },
   {
-    id: 'smart-learning',
-    title: 'Smart Learning System',
-    category: 'Coming Soon',
-    description: 'Personalized AI-powered education platform for future-ready skill development.',
-    tags: ['EdTech', 'ML', 'Platform'],
-    status: 'coming-soon',
-  },
-  {
-    id: 'analytics-suite',
-    title: 'Business Analytics Suite',
-    category: 'Coming Soon',
-    description: 'Data-driven insights and predictive analytics for informed decision making.',
-    tags: ['Analytics', 'Dashboard', 'B2B'],
-    status: 'coming-soon',
+    id: 'ai-sales-agent',
+    title: 'Autonomous AI Outbound Sales Agent',
+    category: 'AI Automation',
+    description: 'A fully autonomous AI agent that researches companies, scrapes value propositions, and generates hyper-personalized cold emails to CEOs — zero human intervention.',
+    tags: ['n8n', 'Google Gemini', 'Docker', 'Automation'],
+    status: 'live' as const,
   },
 ];
 
@@ -334,6 +327,7 @@ const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [expandedProject, setExpandedProject] = useState<Project | null>(null);
+  const [showSalesAgent, setShowSalesAgent] = useState(false);
 
   const handleClose = useCallback(() => setExpandedProject(null), []);
 
@@ -351,7 +345,7 @@ const Projects = () => {
           <p className="text-muted-foreground text-lg">Innovative solutions that are shaping the future of AI and automation.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -361,20 +355,33 @@ const Projects = () => {
             >
               <TiltCard tiltIntensity={14}>
                 <button
-                  onClick={() => project.status === 'live' ? setExpandedProject(project) : null}
-                  className={`w-full text-left ${project.status === 'live' ? 'cursor-pointer' : 'cursor-default'}`}
+                  onClick={() => {
+                    if (project.id === 'ai-sales-agent') setShowSalesAgent(true);
+                    else if (project.status === 'live') setExpandedProject(project);
+                  }}
+                  className="w-full text-left cursor-pointer"
                 >
                   <div className="relative h-48 overflow-hidden bg-gradient-to-br from-secondary/50 to-accent/[0.03]">
-                    {project.status === 'live' ? <ResilienceNetVisual /> : <AILoader />}
+                    {project.id === 'ai-sales-agent' ? (
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0, 0.2] }} transition={{ duration: 3, repeat: Infinity }} className="absolute w-24 h-24 rounded-full border border-accent/20" />
+                        <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: 'linear' }} className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center" style={{ boxShadow: '0 0 30px hsl(192 91% 42% / 0.2)' }}>
+                          <Bot className="w-8 h-8 text-accent" />
+                        </motion.div>
+                        <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-3 text-center">
+                          <span className="text-[10px] font-mono text-accent/60 tracking-wider uppercase">Deep Dive →</span>
+                        </motion.div>
+                      </div>
+                    ) : (
+                      <ResilienceNetVisual />
+                    )}
                   </div>
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-display font-semibold text-lg text-foreground">{project.title}</h3>
-                      {project.status === 'live' && (
-                        <div className="w-8 h-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
-                          <ArrowUpRight className="w-4 h-4 text-accent" />
-                        </div>
-                      )}
+                      <div className="w-8 h-8 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
+                        <ArrowUpRight className="w-4 h-4 text-accent" />
+                      </div>
                     </div>
                     <p className="text-accent text-xs font-medium mb-2">{project.category}</p>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-4">{project.description}</p>
@@ -403,9 +410,10 @@ const Projects = () => {
         </motion.div>
       </div>
 
-      {/* Expanded modal */}
+      {/* Expanded modals */}
       <AnimatePresence>
         {expandedProject && <ProjectModal project={expandedProject} onClose={handleClose} />}
+        {showSalesAgent && <SalesAgentModal onClose={() => setShowSalesAgent(false)} />}
       </AnimatePresence>
     </section>
   );
