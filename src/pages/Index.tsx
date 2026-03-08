@@ -24,6 +24,7 @@ const Index = () => {
         <Projects />
         <VentureTimeline />
         <Contact />
+        <InteractiveTerminal />
       </main>
       <Footer />
       <AIChatWidget />
