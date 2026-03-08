@@ -3,6 +3,8 @@ import { useRef, useState, useCallback } from 'react';
 import { ArrowUpRight, Sparkles, Cpu, X, ExternalLink, Github, Radio, Wifi, Database, Server, Shield, Globe, Zap, Signal, Bot } from 'lucide-react';
 import TiltCard from './TiltCard';
 import SalesAgentModal from './SalesAgentModal';
+import CampusTradeModal from './CampusTradeModal';
+import campusTradeHero from '@/assets/campustrade-hero.png';
 
 interface Project {
   id: string;
@@ -54,6 +56,14 @@ const projects: Project[] = [
     category: 'AI Automation',
     description: 'A fully autonomous AI agent that researches companies, scrapes value propositions, and generates hyper-personalized cold emails to CEOs — zero human intervention.',
     tags: ['n8n', 'Google Gemini', 'Docker', 'Automation'],
+    status: 'live' as const,
+  },
+  {
+    id: 'campustrade',
+    title: 'CampusTrade: TKM E-commerce',
+    category: 'Featured Venture',
+    description: 'A specialized platform enabling TKM students to safely buy and sell campus gear, electronics, and support student brands — built for the Kollam college community.',
+    tags: ['Full-Stack', 'E-commerce', 'TKM Certified', 'Vercel'],
     status: 'live' as const,
   },
 ];
@@ -328,6 +338,7 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [expandedProject, setExpandedProject] = useState<Project | null>(null);
   const [showSalesAgent, setShowSalesAgent] = useState(false);
+  const [showCampusTrade, setShowCampusTrade] = useState(false);
 
   const handleClose = useCallback(() => setExpandedProject(null), []);
 
@@ -357,6 +368,7 @@ const Projects = () => {
                 <button
                   onClick={() => {
                     if (project.id === 'ai-sales-agent') setShowSalesAgent(true);
+                    else if (project.id === 'campustrade') setShowCampusTrade(true);
                     else if (project.status === 'live') setExpandedProject(project);
                   }}
                   className="w-full text-left cursor-pointer"
@@ -370,6 +382,14 @@ const Projects = () => {
                         </motion.div>
                         <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-3 text-center">
                           <span className="text-[10px] font-mono text-accent/60 tracking-wider uppercase">Deep Dive →</span>
+                        </motion.div>
+                      </div>
+                    ) : project.id === 'campustrade' ? (
+                      <div className="relative w-full h-full">
+                        <img src={campusTradeHero} alt="CampusTrade" className="w-full h-full object-cover opacity-80" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                        <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-3 left-0 right-0 text-center">
+                          <span className="text-[10px] font-mono text-accent/60 tracking-wider uppercase">Explore Venture →</span>
                         </motion.div>
                       </div>
                     ) : (
@@ -414,6 +434,7 @@ const Projects = () => {
       <AnimatePresence>
         {expandedProject && <ProjectModal project={expandedProject} onClose={handleClose} />}
         {showSalesAgent && <SalesAgentModal onClose={() => setShowSalesAgent(false)} />}
+        {showCampusTrade && <CampusTradeModal onClose={() => setShowCampusTrade(false)} />}
       </AnimatePresence>
     </section>
   );
