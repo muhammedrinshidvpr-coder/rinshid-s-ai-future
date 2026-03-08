@@ -195,4 +195,28 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @keyframes borderGlow {
+    0% { --border-angle: 0deg; }
+    100% { --border-angle: 360deg; }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 4s linear infinite;
+  }
+
+  .animate-border-glow {
+    animation: borderGlow 4s linear infinite;
+  }
+
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
 }
