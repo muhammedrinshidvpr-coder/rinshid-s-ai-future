@@ -64,10 +64,10 @@ const TimelineNode = ({ milestone, index }: { milestone: Milestone; index: numbe
   const decodedDesc = useDecodeText(milestone.description, isInView, 8);
 
   return (
-    <div ref={ref} className="relative flex items-center justify-center py-12 md:py-20">
-      {/* Center node */}
+    <div ref={ref} className="relative flex items-center justify-center py-6 md:py-20">
+      {/* Center node - hidden on mobile */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 z-20"
+        className="absolute left-1/2 -translate-x-1/2 z-20 hidden md:flex"
         initial={{ scale: 0, opacity: 0 }}
         animate={isInView ? { scale: 1, opacity: 1 } : {}}
         transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.2 }}
@@ -104,7 +104,7 @@ const TimelineNode = ({ milestone, index }: { milestone: Milestone; index: numbe
       {/* Content card */}
       <div className={`w-full flex ${isLeft ? 'md:justify-start' : 'md:justify-end'} justify-center`}>
         <motion.div
-          className={`w-full md:w-[calc(50%-3rem)] glass-card rounded-2xl p-6 md:p-7 relative overflow-hidden ${
+          className={`w-full md:w-[calc(50%-3rem)] glass-card rounded-2xl p-5 md:p-7 relative overflow-hidden ${
             isLeft ? 'md:mr-auto' : 'md:ml-auto'
           }`}
           initial={{ opacity: 0, x: isLeft ? -40 : 40, y: 10 }}
