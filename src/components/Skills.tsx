@@ -175,7 +175,7 @@ const Skills = () => {
   const snippet = useMemo(() => skillSnippets[activeSkill], [activeSkill]);
 
   // Orbit radii: md uses full, mobile not shown (grid instead)
-  const orbitRadii = [90, 155, 215];
+  const orbitRadii = [100, 180, 260];
   const ringCounts = { 1: 3, 2: 3, 3: 3 };
 
   return (
@@ -232,7 +232,7 @@ const Skills = () => {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative flex items-center justify-center"
           >
-            <div className="relative w-[460px] h-[460px]">
+            <div className="relative w-[560px] h-[560px]">
               {/* Orbit rings */}
               {orbitRadii.map((r) => (
                 <div
