@@ -175,7 +175,7 @@ const Skills = () => {
   const snippet = useMemo(() => skillSnippets[activeSkill], [activeSkill]);
 
   // Orbit radii: md uses full, mobile not shown (grid instead)
-  const orbitRadii = [90, 155, 215];
+  const orbitRadii = [100, 180, 260];
   const ringCounts = { 1: 3, 2: 3, 3: 3 };
 
   return (
