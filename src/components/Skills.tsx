@@ -177,6 +177,7 @@ const Skills = () => {
   // Orbit radii: md uses full, mobile not shown (grid instead)
   const orbitRadii = [100, 180, 260];
   const ringCounts = { 1: 3, 2: 3, 3: 3 };
+  const ringPhaseOffsets = { 1: -90, 2: -40, 3: 10 } as const;
 
   return (
     <section id="skills" className="section-padding relative" ref={ref}>
@@ -267,7 +268,7 @@ const Skills = () => {
                   const ring = skill.ring as 1 | 2 | 3;
                   const ringIdx = indices[ring]++;
                   const total = ringCounts[ring];
-                  const angle = (ringIdx / total) * 360;
+                  const angle = (ringIdx / total) * 360 + ringPhaseOffsets[ring];
                   const radius = orbitRadii[ring - 1];
                   const isActive = activeSkill === skill.name;
                   const Icon = skill.icon;
@@ -283,11 +284,12 @@ const Skills = () => {
                       transition={{ delay: 0.3 + i * 0.08, duration: 0.5, type: 'spring', stiffness: 200 }}
                       onClick={() => setActiveSkill(skill.name)}
                       onMouseEnter={() => setActiveSkill(skill.name)}
-                      className="absolute z-20 group"
+                      className="absolute z-20 group -translate-x-1/2 -translate-y-1/2"
                       style={{
                         top: '50%',
                         left: '50%',
-                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                        x,
+                        y,
                       }}
                     >
                       <motion.div
