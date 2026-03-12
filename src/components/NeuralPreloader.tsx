@@ -95,9 +95,9 @@ const NeuralPreloader = ({ onComplete }: { onComplete: () => void }) => {
         <motion.div
           className="absolute rounded-full"
           style={{
-            width: 20, height: 20,
-            background: 'radial-gradient(circle, hsl(192 91% 72%) 0%, hsl(192 91% 42%) 50%, hsl(260 60% 45%) 100%)',
-            boxShadow: '0 0 30px 10px hsla(192,91%,42%,0.5), 0 0 60px 20px hsla(260,60%,55%,0.2)',
+            width: 24, height: 24,
+            background: 'radial-gradient(circle, hsl(192 91% 90%) 0%, hsl(192 91% 72%) 30%, hsl(192 91% 50%) 60%, hsl(260 60% 45%) 100%)',
+            boxShadow: '0 0 40px 15px hsla(192,91%,60%,0.8), 0 0 80px 30px hsla(192,91%,42%,0.5), 0 0 120px 50px hsla(260,60%,55%,0.3), 0 0 200px 80px hsla(192,91%,42%,0.15)',
           }}
           animate={phase === 'pulse'
             ? { scale: [1, 1.4, 1], boxShadow: [
