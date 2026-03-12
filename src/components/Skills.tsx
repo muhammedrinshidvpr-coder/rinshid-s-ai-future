@@ -177,6 +177,7 @@ const Skills = () => {
   // Orbit radii: md uses full, mobile not shown (grid instead)
   const orbitRadii = [100, 180, 260];
   const ringCounts = { 1: 3, 2: 3, 3: 3 };
+  const ringPhaseOffsets = { 1: -90, 2: -40, 3: 10 } as const;
 
   return (
     <section id="skills" className="section-padding relative" ref={ref}>
