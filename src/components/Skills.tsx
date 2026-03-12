@@ -238,7 +238,7 @@ const Skills = () => {
               {orbitRadii.map((r) => (
                 <div
                   key={r}
-                  className="absolute rounded-full border border-white/[0.04]"
+                  className="absolute rounded-full border border-white/[0.15]"
                   style={{
                     width: r * 2,
                     height: r * 2,
