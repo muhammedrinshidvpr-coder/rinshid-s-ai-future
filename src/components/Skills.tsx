@@ -232,7 +232,7 @@ const Skills = () => {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative flex items-center justify-center"
           >
-            <div className="relative w-[460px] h-[460px]">
+            <div className="relative w-[560px] h-[560px]">
               {/* Orbit rings */}
               {orbitRadii.map((r) => (
                 <div
