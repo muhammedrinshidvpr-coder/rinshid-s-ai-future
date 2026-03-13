@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ArrowDown, Sparkles } from 'lucide-react';
 import heroImage from '@/assets/rinshid-hero.png';
+import LiveStatusBadge from '@/components/LiveStatusBadge';
 
 // Decode/typewriter text animation
 const DecodeText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
