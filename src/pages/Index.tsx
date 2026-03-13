@@ -46,6 +46,7 @@ const Index = () => {
         <Footer />
         <AIChatWidget />
         <CommandPalette />
+        <CustomCursor />
       </div>
     </>
   );
