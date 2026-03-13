@@ -15,6 +15,7 @@ import Footer from '@/components/Footer';
 import AIChatWidget from '@/components/AIChatWidget';
 import NeuralPreloader from '@/components/NeuralPreloader';
 import CommandPalette from '@/components/CommandPalette';
+import CustomCursor from '@/components/CustomCursor';
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
