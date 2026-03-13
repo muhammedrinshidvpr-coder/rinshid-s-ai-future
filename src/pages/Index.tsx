@@ -44,6 +44,7 @@ const Index = () => {
         </main>
         <Footer />
         <AIChatWidget />
+        <CommandPalette />
       </div>
     </>
   );
