@@ -14,6 +14,7 @@ import InteractiveTerminal from '@/components/InteractiveTerminal';
 import Footer from '@/components/Footer';
 import AIChatWidget from '@/components/AIChatWidget';
 import NeuralPreloader from '@/components/NeuralPreloader';
+import CommandPalette from '@/components/CommandPalette';
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
