@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ArrowDown, Sparkles } from 'lucide-react';
 import heroImage from '@/assets/rinshid-hero.png';
+import LiveStatusBadge from '@/components/LiveStatusBadge';
 
 // Decode/typewriter text animation
 const DecodeText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -175,6 +176,15 @@ const Hero = () => {
               >
                 Learn More
               </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+              className="flex justify-center lg:justify-start mt-6"
+            >
+              <LiveStatusBadge />
             </motion.div>
           </motion.div>
 
