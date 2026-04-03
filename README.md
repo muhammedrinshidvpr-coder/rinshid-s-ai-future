@@ -1,4 +1,3 @@
-
 # 🌌 Muhammed Rinshid VP | Digital Ecosystem & Portfolio
 
 [![Portfolio Live](https://img.shields.io/badge/Live_Site-View_Portfolio-0A0A0A?style=for-the-badge&logo=vercel)](https://your-portfolio-link.com)
